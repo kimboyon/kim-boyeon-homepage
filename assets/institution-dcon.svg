@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 96" role="img" aria-label="Digital Convergence Education Institute">
+  <rect width="160" height="96" rx="18" fill="#5145ee"/>
+  <rect x="55" y="25" width="50" height="46" rx="8" fill="none" stroke="#fff" stroke-width="8"/>
+  <path d="M64 14v16M80 14v16M96 14v16M64 66v16M80 66v16M96 66v16M41 38h16M41 58h16M103 38h16M103 58h16" stroke="#fff" stroke-width="6" stroke-linecap="round"/>
+</svg>

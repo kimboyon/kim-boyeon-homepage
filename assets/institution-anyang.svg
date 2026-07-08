@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 96" role="img" aria-label="Anyang Babyboomer Center">
+  <rect width="160" height="96" rx="18" fill="#5aa28d"/>
+  <circle cx="80" cy="35" r="10" fill="#fff"/>
+  <circle cx="55" cy="48" r="9" fill="#fff"/>
+  <circle cx="105" cy="48" r="9" fill="#fff"/>
+  <path d="M42 72c8-18 32-18 40 0M78 72c8-18 32-18 40 0" stroke="#fff" stroke-width="8" fill="none" stroke-linecap="round"/>
+</svg>

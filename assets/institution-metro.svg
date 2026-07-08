@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 96" role="img" aria-label="Metro Economy">
+  <rect width="160" height="96" rx="18" fill="#27442f"/>
+  <rect x="33" y="19" width="94" height="58" rx="10" fill="#315b3e" stroke="#55745a" stroke-width="8"/>
+  <text x="50" y="49" font-family="Arial, sans-serif" font-size="24" font-weight="800" fill="#f2fff1">metro</text>
+  <text x="54" y="65" font-family="Arial, sans-serif" font-size="14" fill="#f2fff1">Economy</text>
+</svg>

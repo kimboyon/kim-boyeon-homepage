@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 96" role="img" aria-label="Korea Tech">
+  <rect width="160" height="96" rx="18" fill="#ffffff"/>
+  <rect x="25" y="26" width="34" height="34" fill="#777"/>
+  <text x="29" y="49" font-family="Arial, sans-serif" font-size="15" font-weight="800" fill="#fff">HRD</text>
+  <text x="68" y="45" font-family="Arial, sans-serif" font-size="19" font-weight="900" fill="#777">KOREA</text>
+  <text x="68" y="65" font-family="Arial, sans-serif" font-size="19" font-weight="900" fill="#bbb">TECH</text>
+</svg>

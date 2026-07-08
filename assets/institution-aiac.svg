@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 96" role="img" aria-label="AI Artist Club">
+  <rect width="160" height="96" rx="18" fill="#9437df"/>
+  <path d="M48 67 68 28h12l20 39H86l-4-9H65l-4 9H48Z" fill="#fff"/>
+  <path d="M112 28v39" stroke="#fff" stroke-width="12" stroke-linecap="round"/>
+  <path d="M34 72c34-7 56-23 82-52" stroke="#fff" stroke-width="8" stroke-linecap="round"/>
+</svg>

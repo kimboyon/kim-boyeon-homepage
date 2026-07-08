@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 96" role="img" aria-label="Korea Optical Industry Agency">
+  <rect width="160" height="96" rx="18" fill="#ffffff"/>
+  <path d="M37 48a22 22 0 1 1 38 15 22 22 0 0 0 26-30 24 24 0 1 1-64 15Z" fill="#7d3f96"/>
+  <path d="M46 56a30 30 0 0 0 54-5" stroke="#c8942f" stroke-width="10" fill="none" stroke-linecap="round"/>
+  <text x="86" y="45" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#6d6d6d">eyewear</text>
+  <text x="86" y="65" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#555">korea</text>
+</svg>
