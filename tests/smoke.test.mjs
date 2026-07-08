@@ -159,6 +159,41 @@ test("homepage includes updated lecture details, icons, form CTA, and institutio
   assert.match(css, /\.institution-logo/, "institution logo styles should exist");
 });
 
+test("homepage includes a collapsible representative lecture example", () => {
+  const html = readFileSync(join(root, "index.html"), "utf8");
+  const css = readFileSync(join(root, "styles.css"), "utf8");
+  const js = readFileSync(join(root, "script.js"), "utf8");
+
+  assert.match(
+    html,
+    /<button class="lecture-example-toggle" type="button" aria-expanded="false" aria-controls="lecture-example">대표강의 예시<\/button>[\s\S]*<span>🗓️ 원데이~8주<\/span>/,
+    "representative lecture button should appear before one-day to eight-week chip",
+  );
+  assert.match(
+    html,
+    /<div class="lecture-example-panel" id="lecture-example" hidden>/,
+    "representative lecture panel should start collapsed",
+  );
+
+  for (const text of [
+    "보는 AI에서 만드는 AI로",
+    "내 손으로 이미지·영상·책을 완성하다",
+    "우리 청중에게 맞을지 궁금하시면",
+    "공공도서관·평생학습관",
+    "2시간 특강",
+    "4주 과정",
+    "10년차 요양보호사에서 AI강사·창작가가 된 김보연",
+    "AI 아트 공모전 3회 수상",
+    "우리 청중에게 딱 맞는 AI 창작 강의",
+  ]) {
+    assert.match(html, new RegExp(text), `missing representative lecture text: ${text}`);
+  }
+
+  assert.match(css, /\.lecture-example-panel/, "lecture example panel styles should exist");
+  assert.match(js, /lectureExampleToggle/, "lecture example toggle script should exist");
+  assert.match(js, /aria-expanded/, "toggle script should update aria-expanded");
+});
+
 test("homepage expands AI art gallery and award history", () => {
   const html = readFileSync(join(root, "index.html"), "utf8");
   const css = readFileSync(join(root, "styles.css"), "utf8");

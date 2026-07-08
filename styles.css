@@ -360,7 +360,8 @@ h3 {
 }
 
 .lecture-meta span,
-.lecture-meta a {
+.lecture-meta a,
+.lecture-meta button {
   display: inline-flex;
   align-items: center;
   min-height: 38px;
@@ -373,10 +374,103 @@ h3 {
   white-space: nowrap;
 }
 
+.lecture-meta button {
+  cursor: pointer;
+  color: white;
+  background: var(--charcoal);
+}
+
 .lecture-meta .lecture-form-link {
   border-color: rgba(50, 130, 120, 0.38);
   color: white;
   background: var(--teal);
+}
+
+.lecture-example-panel {
+  margin: 0 0 28px;
+  padding: clamp(22px, 4vw, 38px);
+  border: 1px solid var(--line);
+  background: #f8f7f1;
+}
+
+.lecture-example-panel[hidden] {
+  display: none;
+}
+
+.lecture-example-cta {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 20px;
+  padding: 20px;
+  color: white;
+  background: var(--charcoal);
+}
+
+.lecture-example-cta strong {
+  font-size: 1.2rem;
+}
+
+.lecture-example-cta p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.82);
+  word-break: keep-all;
+}
+
+.lecture-example-cta a {
+  justify-self: start;
+  margin-top: 6px;
+  padding: 10px 14px;
+  color: #17120f;
+  background: #f7c548;
+  font-weight: 900;
+}
+
+.lecture-example-cta.bottom {
+  margin: 22px 0 0;
+}
+
+.lecture-example-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.lecture-example-grid article {
+  padding: 22px;
+  border: 1px solid var(--line);
+  background: white;
+}
+
+.lecture-example-grid .lecture-example-main {
+  grid-column: span 2;
+  background: #fffdf8;
+}
+
+.lecture-example-grid h3 {
+  max-width: 940px;
+  margin-bottom: 12px;
+  font-size: clamp(1.6rem, 3.4vw, 3.2rem);
+  line-height: 1.08;
+  word-break: keep-all;
+}
+
+.lecture-example-grid h4 {
+  margin-bottom: 12px;
+  font-size: 1.08rem;
+}
+
+.lecture-example-grid p,
+.lecture-example-grid li {
+  color: var(--muted);
+  line-height: 1.75;
+  word-break: keep-all;
+}
+
+.lecture-example-grid ul,
+.lecture-example-grid ol {
+  display: grid;
+  gap: 8px;
+  padding-left: 1.1rem;
 }
 
 .section-heading {
@@ -809,6 +903,12 @@ figcaption {
   .value-section,
   .film-grid {
     grid-template-columns: 1fr;
+  }
+
+  .lecture-example-grid,
+  .lecture-example-grid .lecture-example-main {
+    grid-template-columns: 1fr;
+    grid-column: auto;
   }
 
   .art-awards ul {
