@@ -18,7 +18,7 @@ test("homepage shell includes the core brand sections", () => {
     "AI영화",
     "저서",
     "출강기관",
-    "강의 문의",
+    "기관 강의 문의하기",
   ]) {
     assert.match(html, new RegExp(text), `missing text: ${text}`);
   }
@@ -52,8 +52,10 @@ test("homepage uses updated speaker wording and Korean line-breaking controls", 
 
   assert.match(html, /AI출판작가/, "speaker intro should say AI출판작가");
   assert.doesNotMatch(html, /출판 작가/, "old speaker wording should be removed");
-  assert.match(html, /요양보호사 10년/, "career metric should include care worker experience");
-  assert.match(html, /AI를 통한 인생3막/, "career metric should include third-life AI message");
+  assert.match(html, /공직 20년 5개월 · 요양보호사 10년 · AI로 시작한 인생 3막/, "career metric should be grouped clearly");
+  assert.match(html, /경력[\s\S]*공직 20년 5개월[\s\S]*요양보호사 10년/, "about section should separate career evidence");
+  assert.match(html, /자격[\s\S]*따능AI활용전문강사 2급[\s\S]*생성형AI교육지도사/, "about section should separate qualifications");
+  assert.match(html, /창작 성과[\s\S]*출간 도서 16권[\s\S]*AI아트 공모전 수상 3회/, "about section should separate creative results");
   assert.doesNotMatch(html, /24\+/, "duplicated AI film count metric should be removed");
   assert.doesNotMatch(html, /AI영화 선정·수상/, "duplicated AI film metric label should be removed");
   assert.match(css, /word-break:\s*keep-all/, "Korean words should not break awkwardly");
@@ -101,6 +103,21 @@ test("homepage includes all 16 published book covers and lecture institutions", 
   ]) {
     assert.match(html, new RegExp(institution), `missing institution: ${institution}`);
   }
+
+  assert.match(
+    html,
+    /공공기관·대학·평생학습기관에서 생성형 AI 실습과 콘텐츠 창작 강의를 진행했습니다\./,
+    "institution section should explain lecture evidence",
+  );
+  for (const topic of [
+    "생성형 AI 실습",
+    "AI아트 창작",
+    "업무효율화",
+    "AI출판",
+    "AI 영상콘텐츠",
+  ]) {
+    assert.match(html, new RegExp(topic), `missing institution topic: ${topic}`);
+  }
 });
 
 test("homepage includes updated lecture details, icons, form CTA, and institution logo assets", () => {
@@ -109,14 +126,15 @@ test("homepage includes updated lecture details, icons, form CTA, and institutio
 
   for (const text of [
     "강의기간 : 원데이~8주",
-    "강의대상 : 공공기관 및 기업, 평생학습기관, 소상공인 등",
+    "주 대상: 성인·중장년",
+    "기관 맞춤 가능: 공공기관·평생학습기관·기업",
     "업무효율화와 자동화",
     "소상공인 마케팅",
     "브랜드 이미지와 캐릭터, 로고",
     "그림책, 컬러링북, 자서전",
     "AI영화 제작 및 시나리오 창작",
-    "구글폼으로 문의하기",
-    "구글폼문의",
+    "기관 맞춤 가능 주제",
+    "기관 강의 문의하기",
     "https://forms.gle/mHuHnCKQ2qnffuE79",
   ]) {
     assert.match(html, new RegExp(text), `missing lecture update: ${text}`);
@@ -124,14 +142,15 @@ test("homepage includes updated lecture details, icons, form CTA, and institutio
 
   assert.match(
     html,
-    /<nav class="nav-links"[\s\S]*<a href="https:\/\/forms\.gle\/mHuHnCKQ2qnffuE79"[^>]*>구글폼문의<\/a>/,
-    "header should include Google Form inquiry menu",
+    /<nav class="nav-links"[\s\S]*<a href="https:\/\/forms\.gle\/mHuHnCKQ2qnffuE79"[^>]*>기관 강의 문의하기<\/a>/,
+    "header should include unified inquiry menu",
   );
   assert.match(
     html,
-    /<div class="lecture-meta"[\s\S]*<a class="lecture-form-link" href="https:\/\/forms\.gle\/mHuHnCKQ2qnffuE79"[^>]*>구글폼문의<\/a>/,
-    "lecture meta should include Google Form inquiry link",
+    /<div class="lecture-meta"[\s\S]*<a class="lecture-form-link" href="https:\/\/forms\.gle\/mHuHnCKQ2qnffuE79"[^>]*>기관 강의 문의하기<\/a>/,
+    "lecture meta should include unified inquiry link",
   );
+  assert.doesNotMatch(html, /구글폼문의|구글폼으로 문의하기|>강의 문의</, "mixed inquiry labels should be removed");
 
   for (const icon of ["⚡", "🤖", "📈", "🎨", "📚", "🎬"]) {
     assert.match(html, new RegExp(icon), `missing icon: ${icon}`);
@@ -178,13 +197,13 @@ test("homepage includes a collapsible representative lecture example", () => {
   for (const text of [
     "보는 AI에서 만드는 AI로",
     "내 손으로 이미지·영상·책을 완성하다",
-    "우리 청중에게 맞을지 궁금하시면",
+    "강의 안에서 이미지·짧은 영상·전자책 아이디어 중 하나를 완성하는 실습형 과정",
     "공공도서관·평생학습관",
     "2시간 특강",
     "4주 과정",
     "10년차 요양보호사에서 AI강사·창작가가 된 김보연",
     "AI 아트 공모전 3회 수상",
-    "우리 청중에게 딱 맞는 AI 창작 강의",
+    "대상 인원·희망 일정·강의 목적을 알려주시면 기관 맞춤 구성으로 제안드립니다.",
   ]) {
     assert.match(html, new RegExp(text), `missing representative lecture text: ${text}`);
   }
@@ -192,6 +211,18 @@ test("homepage includes a collapsible representative lecture example", () => {
   assert.match(css, /\.lecture-example-panel/, "lecture example panel styles should exist");
   assert.match(js, /lectureExampleToggle/, "lecture example toggle script should exist");
   assert.match(js, /aria-expanded/, "toggle script should update aria-expanded");
+});
+
+test("homepage hero focuses on the primary lecture offer", () => {
+  const html = readFileSync(join(root, "index.html"), "utf8");
+  const css = readFileSync(join(root, "styles.css"), "utf8");
+
+  assert.match(html, /성인·중장년을 위한 실습형 생성형 AI 강의/, "hero should lead with primary lecture offer");
+  assert.match(html, /이미지·영상·전자책 결과물까지 완성합니다/, "hero should state concrete outcomes");
+  assert.match(html, /AI가 처음인 성인·중장년을 위한 생성형 AI 실습 강의입니다\./, "hero intro should be short first sentence");
+  assert.match(html, /이미지·짧은 영상·전자책 아이디어 중 하나를 직접 완성합니다\./, "hero intro should be short second sentence");
+  assert.match(html, /<a class="button primary hero-primary-cta" href="https:\/\/forms\.gle\/mHuHnCKQ2qnffuE79"[^>]*>기관 강의 문의하기<\/a>/, "hero primary CTA should link to form");
+  assert.match(css, /\.hero-primary-cta/, "hero primary CTA should have distinct emphasis styles");
 });
 
 test("homepage expands AI art gallery and award history", () => {
