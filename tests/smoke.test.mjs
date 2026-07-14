@@ -34,6 +34,7 @@ test("homepage references real local media assets", () => {
     "assets/hero-film.mp4",
     "assets/qr-blog.png",
     "assets/qr-littly.png",
+    "assets/qr-kakao-openchat.jpg",
     "assets/main-watercolor.png",
     "assets/main-card.jpg",
     "assets/main-sunglasses.png",
@@ -44,6 +45,8 @@ test("homepage references real local media assets", () => {
     assert.match(html, new RegExp(asset.replace(".", "\\.")), `missing asset reference: ${asset}`);
     assert.equal(existsSync(join(root, asset)), true, `asset should exist: ${asset}`);
   }
+
+  assert.match(html, /카톡 오픈채팅방 문의/, "contact QR panel should include Kakao open chat inquiry caption");
 });
 
 test("homepage uses updated speaker wording and Korean line-breaking controls", () => {

@@ -873,7 +873,7 @@ figcaption {
 
 .contact-section {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(240px, 340px) minmax(220px, 300px);
+  grid-template-columns: minmax(0, 1fr) minmax(240px, 340px) minmax(260px, 430px);
   gap: 32px;
   padding: clamp(64px, 8vw, 100px) clamp(20px, 5vw, 72px);
   color: white;
@@ -904,7 +904,7 @@ figcaption {
 
 .qr-panel {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 14px;
   align-self: start;
 }
@@ -950,6 +950,10 @@ figcaption {
   .split,
   .contact-section {
     grid-template-columns: 1fr;
+  }
+
+  .qr-panel {
+    max-width: 560px;
   }
 
   .profile-panel {
