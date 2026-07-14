@@ -43,6 +43,11 @@ test("homepage references real local media assets", () => {
     "assets/lecture-koreatech.JPG",
     "assets/lecture-anyang-babyboomer.JPG",
     "assets/lecture-pod-guide.jpg",
+    "assets/review-survey-01.png",
+    "assets/review-survey-02.png",
+    "assets/review-kakao-ai-class.png",
+    "assets/review-blog-comment.png",
+    "assets/review-kakao-video-class.jpg",
   ];
 
   for (const asset of requiredAssets) {
@@ -66,6 +71,7 @@ test("homepage hero uses lecture field photos and removes old value cards", () =
   assert.doesNotMatch(html, />AI로 그리다</, "old AI drawing card should be removed");
   assert.doesNotMatch(html, />AI로 만들다</, "old AI making card should be removed");
   assert.match(css, /\.lecture-photo-grid/, "lecture photo grid should have dedicated styling");
+  assert.match(css, /\.lecture-photo-grid[\s\S]*grid-template-columns:\s*repeat\(3,\s*1fr\)/, "lecture photo grid should use equal columns");
 });
 
 test("homepage uses updated speaker wording and Korean line-breaking controls", () => {
@@ -278,4 +284,30 @@ test("homepage expands AI art gallery and award history", () => {
     /\.feature-art img[\s\S]*object-fit:\s*contain/,
     "We feel each other feature image should be fully visible",
   );
+});
+
+test("homepage includes compact clickable lecture reviews below institutions", () => {
+  const html = readFileSync(join(root, "index.html"), "utf8");
+  const css = readFileSync(join(root, "styles.css"), "utf8");
+
+  assert.match(html, /<h3>강의후기<\/h3>/, "lecture review heading should exist");
+  assert.match(html, /이미지를 클릭하면 크게 볼 수 있습니다\./, "review helper text should explain click-to-enlarge behavior");
+
+  for (const asset of [
+    "review-survey-01.png",
+    "review-survey-02.png",
+    "review-kakao-ai-class.png",
+    "review-blog-comment.png",
+    "review-kakao-video-class.jpg",
+  ]) {
+    assert.match(
+      html,
+      new RegExp(`<a href="assets/${asset.replace(".", "\\.")}"[^>]*>[\\s\\S]*<img src="assets/${asset.replace(".", "\\.")}"`),
+      `review thumbnail should link to full image: ${asset}`,
+    );
+    assert.equal(existsSync(join(root, "assets", asset)), true, `review asset should exist: ${asset}`);
+  }
+
+  assert.match(css, /\.review-gallery[\s\S]*grid-template-columns:\s*repeat\(5,\s*1fr\)/, "review thumbnails should be compact and even");
+  assert.match(css, /\.review-gallery img[\s\S]*aspect-ratio:\s*4 \/ 3/, "review thumbnails should have uniform dimensions");
 });
