@@ -35,10 +35,12 @@ test("homepage references real local media assets", () => {
     "assets/qr-blog.png",
     "assets/qr-littly.png",
     "assets/qr-kakao-openchat.jpg",
-    "assets/main-watercolor.png",
-    "assets/main-card.jpg",
-    "assets/main-sunglasses.png",
-    "assets/main-portrait.jpg",
+    "assets/lecture-metro-workshop.jpeg",
+    "assets/lecture-metro-session.jpg",
+    "assets/lecture-smartcity.JPG",
+    "assets/lecture-asan.JPG",
+    "assets/lecture-donggu.JPG",
+    "assets/lecture-koreatech.JPG",
   ];
 
   for (const asset of requiredAssets) {
@@ -47,6 +49,19 @@ test("homepage references real local media assets", () => {
   }
 
   assert.match(html, /카톡 오픈채팅방 문의/, "contact QR panel should include Kakao open chat inquiry caption");
+});
+
+test("homepage hero uses lecture field photos and removes old value cards", () => {
+  const html = readFileSync(join(root, "index.html"), "utf8");
+  const css = readFileSync(join(root, "styles.css"), "utf8");
+
+  assert.match(html, /lecture-photo-grid/, "hero should use the lecture photo grid");
+  assert.match(html, /메트로경제 임직원 대상 따능AI 활용 강의 현장/, "hero should describe lecture photos");
+  assert.doesNotMatch(html, /<section class="section value-section"/, "old AI value card section should be removed");
+  assert.doesNotMatch(html, />AI로 쓰다</, "old AI writing card should be removed");
+  assert.doesNotMatch(html, />AI로 그리다</, "old AI drawing card should be removed");
+  assert.doesNotMatch(html, />AI로 만들다</, "old AI making card should be removed");
+  assert.match(css, /\.lecture-photo-grid/, "lecture photo grid should have dedicated styling");
 });
 
 test("homepage uses updated speaker wording and Korean line-breaking controls", () => {

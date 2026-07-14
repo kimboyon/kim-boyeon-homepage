@@ -121,7 +121,7 @@ a {
   position: relative;
   z-index: 2;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(280px, 380px);
+  grid-template-columns: minmax(0, 1fr) minmax(340px, 520px);
   align-items: end;
   gap: clamp(28px, 5vw, 70px);
   min-height: calc(100vh - 72px);
@@ -221,6 +221,7 @@ h3 {
 
 .profile-panel {
   align-self: center;
+  width: 100%;
   padding: 18px;
   border: 1px solid rgba(255, 255, 255, 0.22);
   background: rgba(12, 12, 12, 0.48);
@@ -244,6 +245,19 @@ h3 {
 .hero-photo-grid .photo-feature {
   grid-row: span 2;
   aspect-ratio: 4 / 5;
+}
+
+.lecture-photo-grid {
+  grid-template-columns: 1.45fr 1fr 1fr;
+}
+
+.lecture-photo-grid img {
+  aspect-ratio: 4 / 3;
+}
+
+.lecture-photo-grid .photo-feature {
+  grid-row: span 2;
+  aspect-ratio: 4 / 3;
 }
 
 .profile-panel p {
@@ -957,7 +971,7 @@ figcaption {
   }
 
   .profile-panel {
-    max-width: 360px;
+    max-width: 620px;
   }
 
   .intro-band,
@@ -1040,5 +1054,13 @@ figcaption {
 
   .film-card img {
     max-height: 520px;
+  }
+
+  .lecture-photo-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .lecture-photo-grid .photo-feature {
+    grid-column: span 2;
   }
 }
