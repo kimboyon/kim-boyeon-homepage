@@ -257,6 +257,7 @@ h3 {
 }
 
 .lecture-photo-grid .photo-feature {
+  grid-row: auto;
   aspect-ratio: 4 / 3;
 }
 
