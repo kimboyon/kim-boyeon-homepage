@@ -1,0 +1,33 @@
+# 김보연 이음
+
+> 성인·중장년, 공공기관, 평생학습기관, 기업을 위한 실습형 생성형 AI 강의 홈페이지입니다. 김보연 강사는 따능AI, ChatGPT, NotebookLM 등 생성형 AI 도구를 활용해 이미지, 짧은 영상, 전자책 아이디어, AI출판, AI영화 제작을 결과물 중심으로 가르칩니다.
+
+## Core content
+
+- [홈](https://kim-boyeon-homepage.vercel.app/): 김보연 AI 강사의 강의, 경력, 저서, AI아트, AI영화, 출강기관, 문의 정보를 담은 공식 소개 페이지입니다.
+- [강의](https://kim-boyeon-homepage.vercel.app/#lecture): 성인·중장년 대상 생성형 AI 실습 강의와 기관 맞춤 가능 주제를 소개합니다.
+- [출강기관](https://kim-boyeon-homepage.vercel.app/#institutions): 공공기관, 대학, 평생학습기관, 기업 강의 이력과 강의후기를 확인할 수 있습니다.
+- [저서](https://kim-boyeon-homepage.vercel.app/#works): 자기성장, AI리터러시, AI출판, 그림책, 컬러링북 등 출간 도서 17권을 정리했습니다.
+- [AI아트](https://kim-boyeon-homepage.vercel.app/#art): AI아트 작품과 2025~2026년 공모전 수상 이력을 소개합니다.
+- [AI영화](https://kim-boyeon-homepage.vercel.app/#film): The Switch, The Last Lie 등 국제 AI영화제 공식 선정·수상 성과를 소개합니다.
+- [문의](https://kim-boyeon-homepage.vercel.app/#contact): 기관 강의 문의, 이메일, 전화, 인스타그램, 블로그, 리틀리, 카톡 오픈채팅 QR 정보를 제공합니다.
+
+## Author entity
+
+- 이름: 김보연
+- 활동명: 이음
+- 역할: 따능AI활용전문강사, 생성형AI교육지도사, AI영화감독, AI출판작가
+- 분야: 생성형 AI 교육, AI리터러시, AI아트, AI영화, AI출판, 업무효율화와 자동화, 소상공인 마케팅
+- 이메일: ein30@naver.com
+- 전화: 010-8640-0171
+- 인스타그램: https://www.instagram.com/eum_aiartnmedia
+- 블로그: https://blog.naver.com/ein30
+- 유튜브: https://www.youtube.com/@eum_aiartnmedia
+- 리틀리: https://litt.ly/eum_aiartnmedia
+
+## External evidence
+
+- https://www.fntoday.co.kr/news/articleView.html?idxno=382638
+- https://www.fntoday.co.kr/news/articleView.html?idxno=381193
+- https://www.fntoday.co.kr/news/articleView.html?idxno=383175
+- https://www.fntoday.co.kr/news/articleView.html?idxno=377164

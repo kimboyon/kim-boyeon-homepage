@@ -86,14 +86,14 @@ test("homepage uses updated speaker wording and Korean line-breaking controls", 
   assert.match(html, /공직 20년 5개월 · 요양보호사 10년 · AI로 시작한 인생 3막/, "career metric should be grouped clearly");
   assert.match(html, /경력[\s\S]*공직 20년 5개월[\s\S]*요양보호사 10년/, "about section should separate career evidence");
   assert.match(html, /자격[\s\S]*따능AI활용전문강사 2급[\s\S]*생성형AI교육지도사/, "about section should separate qualifications");
-  assert.match(html, /창작 성과[\s\S]*출간 도서 16권[\s\S]*AI아트 공모전 수상 3회/, "about section should separate creative results");
+  assert.match(html, /창작 성과[\s\S]*출간 도서 17권[\s\S]*AI아트 공모전 수상 3회/, "about section should separate creative results");
   assert.doesNotMatch(html, /24\+/, "duplicated AI film count metric should be removed");
   assert.doesNotMatch(html, /AI영화 선정·수상/, "duplicated AI film metric label should be removed");
   assert.match(css, /word-break:\s*keep-all/, "Korean words should not break awkwardly");
   assert.match(css, /\.metric strong[\s\S]*white-space:\s*nowrap/, "metric number should stay on one line");
 });
 
-test("homepage includes all 16 published book covers and lecture institutions", () => {
+test("homepage includes all 17 published book covers and lecture institutions", () => {
   const html = readFileSync(join(root, "index.html"), "utf8");
   const bookAssets = [
     "book-forty.jpg",
@@ -112,6 +112,7 @@ test("homepage includes all 16 published book covers and lecture institutions", 
     "book-author-debut.jpg",
     "book-genspark.jpg",
     "book-rainy-bookstore.jpg",
+    "book-seaside-village-coloring.jpg",
   ];
 
   for (const asset of bookAssets) {
@@ -313,4 +314,46 @@ test("homepage includes compact clickable lecture reviews below institutions", (
 
   assert.match(css, /\.review-gallery[\s\S]*grid-template-columns:\s*repeat\(5,\s*1fr\)/, "review thumbnails should be compact and even");
   assert.match(css, /\.review-gallery img[\s\S]*aspect-ratio:\s*4 \/ 3/, "review thumbnails should have uniform dimensions");
+});
+
+test("homepage includes GEO metadata, crawl files, and external evidence links", () => {
+  const html = readFileSync(join(root, "index.html"), "utf8");
+  const css = readFileSync(join(root, "styles.css"), "utf8");
+  const robots = readFileSync(join(root, "robots.txt"), "utf8");
+  const llms = readFileSync(join(root, "llms.txt"), "utf8");
+
+  for (const text of [
+    '"@type": "FAQPage"',
+    '"@type": "Service"',
+    '"@type": "Offer"',
+    '"dateModified": "2026-08-17"',
+    "기사로 확인하는 강의와 창작 활동",
+  ]) {
+    assert.match(html, new RegExp(text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")), `missing GEO metadata: ${text}`);
+  }
+
+  for (const bot of [
+    "GPTBot",
+    "ChatGPT-User",
+    "ClaudeBot",
+    "anthropic-ai",
+    "PerplexityBot",
+    "Google-Extended",
+    "Bytespider",
+  ]) {
+    assert.match(robots, new RegExp(`User-agent: ${bot}`), `robots.txt should mention ${bot}`);
+  }
+
+  assert.match(llms, /# 김보연 이음/);
+  assert.match(llms, /성인·중장년/);
+  assert.match(css, /\.press-grid/, "external evidence cards should have styles");
+
+  for (const articleId of ["382638", "381193", "383175", "377164"]) {
+    assert.match(
+      html,
+      new RegExp(`https://www\\.fntoday\\.co\\.kr/news/articleView\\.html\\?idxno=${articleId}`),
+      `missing external article link ${articleId}`,
+    );
+    assert.match(llms, new RegExp(`idxno=${articleId}`), `llms.txt should include article ${articleId}`);
+  }
 });
