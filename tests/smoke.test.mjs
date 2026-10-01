@@ -86,14 +86,14 @@ test("homepage uses updated speaker wording and Korean line-breaking controls", 
   assert.match(html, /공직 20년 5개월 · 요양보호사 10년 · AI로 시작한 인생 3막/, "career metric should be grouped clearly");
   assert.match(html, /경력[\s\S]*공직 20년 5개월[\s\S]*요양보호사 10년/, "about section should separate career evidence");
   assert.match(html, /자격[\s\S]*따능AI활용전문강사 2급[\s\S]*생성형AI교육지도사/, "about section should separate qualifications");
-  assert.match(html, /창작 성과[\s\S]*출간 도서 17권[\s\S]*AI아트 공모전 수상 3회/, "about section should separate creative results");
+  assert.match(html, /창작 성과[\s\S]*출간 도서 20권[\s\S]*AI아트 공모전 수상 3회/, "about section should separate creative results");
   assert.doesNotMatch(html, /24\+/, "duplicated AI film count metric should be removed");
   assert.doesNotMatch(html, /AI영화 선정·수상/, "duplicated AI film metric label should be removed");
   assert.match(css, /word-break:\s*keep-all/, "Korean words should not break awkwardly");
   assert.match(css, /\.metric strong[\s\S]*white-space:\s*nowrap/, "metric number should stay on one line");
 });
 
-test("homepage includes all 17 published book covers and lecture institutions", () => {
+test("homepage includes all 20 published book covers and lecture institutions", () => {
   const html = readFileSync(join(root, "index.html"), "utf8");
   const bookAssets = [
     "book-forty.jpg",
@@ -113,10 +113,14 @@ test("homepage includes all 17 published book covers and lecture institutions", 
     "book-genspark.jpg",
     "book-rainy-bookstore.jpg",
     "book-seaside-village-coloring.jpg",
+    "book-everyday-happiness.png",
+    "book-caregiver-ai-instructor.png",
+    "book-senior-smartphone.png",
   ];
 
   for (const asset of bookAssets) {
     assert.match(html, new RegExp(asset.replace(".", "\\.")), `missing book asset: ${asset}`);
+    assert.equal(existsSync(join(root, "assets", asset)), true, `book asset should exist: ${asset}`);
   }
 
   for (const institution of [
@@ -266,10 +270,16 @@ test("homepage expands AI art gallery and award history", () => {
     "art-love.jpg",
     "art-fan.jpg",
     "art-present.jpg",
+    "art-curiosity-window.mp4",
+    "art-new-path.jpg",
   ]) {
     assert.match(html, new RegExp(`assets/${asset}`), `missing added art asset: ${asset}`);
     assert.equal(existsSync(join(root, "assets", asset)), true, `added art asset should exist: ${asset}`);
   }
+
+  assert.match(html, /art-curiosity-window\.mp4" controls/, "exhibition video should be playable");
+  assert.match(html, /Art Symphony Kawasaki 2026 · The Voice of Artists/, "Kawasaki exhibition should be listed");
+  assert.match(html, /AI아트 수상 및 전시 이력/, "art history should cover awards and exhibitions");
 
   for (const text of [
     "2025년 글로벌 AI아트 공모전",
