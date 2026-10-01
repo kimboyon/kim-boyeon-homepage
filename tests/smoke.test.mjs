@@ -90,7 +90,7 @@ test("homepage uses updated speaker wording and Korean line-breaking controls", 
   assert.match(html, /공직 20년 5개월 · 요양보호사 10년 · AI로 시작한 인생 3막/, "career metric should be grouped clearly");
   assert.match(html, /경력[\s\S]*공직 20년 5개월[\s\S]*요양보호사 10년/, "about section should separate career evidence");
   assert.match(html, /자격[\s\S]*따능AI활용전문강사 1급[\s\S]*GOE마케팅컨설턴트[\s\S]*따능AI활용전문강사 2급/, "new qualifications should lead the list");
-  assert.match(html, /2026 AI디지털튜터 양성과정 수료/, "digital tutor training should be listed");
+  assert.match(html, /2026 AI디지털튜터 양성 과정 강사형 온오프라인 교육 수료 \(시행처: 에이블런\)/, "digital tutor training and provider should be listed");
   assert.match(html, /창작 성과[\s\S]*출간 도서 20권[\s\S]*AI아트 공모전 수상 3회/, "about section should separate creative results");
   assert.match(html, /국제AI영화제 37개 공식 선정·수상/, "film festival count should be current");
   assert.doesNotMatch(html, /30여 개/, "outdated film festival count should be removed");
@@ -143,15 +143,25 @@ test("homepage includes all 20 published book covers and lecture institutions", 
     "메트로경제",
     "부산관광공사",
     "아산시 평생학습관",
+    "군산대학교 평생교육원",
+    "동구여자중학교",
   ]) {
     assert.match(html, new RegExp(institution), `missing institution: ${institution}`);
   }
 
   assert.match(
     html,
-    /공공기관·대학·평생학습기관에서 생성형 AI 실습과 콘텐츠 창작 강의를 진행했습니다\./,
+    /공공기관·대학·평생학습기관에서 AI 실습과 콘텐츠 창작 강의를 진행 또는 협력했습니다\./,
     "institution section should explain lecture evidence",
   );
+  for (const [institution, topic] of [
+    ["연암대학교", "따능AI활용"],
+    ["메트로경제", "따능AI활용"],
+    ["군산대학교 평생교육원", "생성형AI활용 출판"],
+    ["동구여자중학교", "AI리터러시와 AI영상콘텐츠 창작"],
+  ]) {
+    assert.match(html, new RegExp(`<strong>${institution}</strong><em>${topic}</em>`), `${institution} should show its lecture topic`);
+  }
   for (const topic of [
     "생성형 AI 실습",
     "AI아트 창작",
@@ -212,6 +222,8 @@ test("homepage includes updated lecture details, icons, form CTA, and institutio
     "institution-metro.svg",
     "institution-bto.svg",
     "institution-asan.svg",
+    "institution-gunsan.svg",
+    "institution-donggu.svg",
   ]) {
     assert.match(html, new RegExp(`assets/${asset}`), `missing institution logo reference: ${asset}`);
     assert.equal(existsSync(join(root, "assets", asset)), true, `institution logo should exist: ${asset}`);
@@ -372,6 +384,8 @@ test("homepage includes GEO metadata, crawl files, and external evidence links",
   assert.match(llms, /# 김보연 이음/);
   assert.match(llms, /성인·중장년/);
   assert.match(css, /\.press-grid/, "external evidence cards should have styles");
+  assert.match(css, /\.press-meta/, "press source and date should have styles");
+  assert.equal((html.match(/<span>파이낸스투데이<\/span>/g) || []).length, 4, "each article should show its publisher");
 
   for (const articleId of ["382638", "381193", "383175", "377164"]) {
     assert.match(

@@ -777,10 +777,18 @@ h3 {
   transform: translateY(-2px);
 }
 
-.press-grid time {
+.press-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 10px;
   color: var(--muted);
   font-size: 0.85rem;
   font-weight: 700;
+}
+
+.press-grid time {
+  color: var(--muted);
 }
 
 .press-grid strong {
