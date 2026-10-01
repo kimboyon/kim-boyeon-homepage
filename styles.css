@@ -273,6 +273,23 @@ h3 {
   font-weight: 900;
 }
 
+.profile-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.profile-summary > div {
+  min-width: 0;
+}
+
+.digital-tutor-badge {
+  width: clamp(64px, 7vw, 96px);
+  height: auto;
+  flex: none;
+}
+
 .intro-band {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -742,9 +759,10 @@ h3 {
 
 .press-grid a {
   display: flex;
-  min-height: 150px;
+  min-height: 190px;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
+  gap: 16px;
   border: 1px solid #dedad0;
   background: #fffdf8;
   padding: 22px;
@@ -759,13 +777,14 @@ h3 {
   transform: translateY(-2px);
 }
 
-.press-grid span {
+.press-grid time {
   color: var(--muted);
-  font-size: 0.9rem;
+  font-size: 0.85rem;
+  font-weight: 700;
 }
 
 .press-grid strong {
-  font-size: clamp(1rem, 1.8vw, 1.22rem);
+  font-size: 1rem;
   line-height: 1.45;
   word-break: keep-all;
   overflow-wrap: anywhere;
@@ -894,20 +913,15 @@ figcaption {
   background: #222;
 }
 
-.art-grid img,
-.art-grid video {
+.art-grid img {
   width: 100%;
   height: 100%;
   aspect-ratio: 1 / 1;
   object-fit: cover;
-}
-
-.art-grid img {
   transition: transform 0.5s ease;
 }
 
-.art-grid .full-art img,
-.art-grid .full-art video {
+.art-grid .full-art img {
   object-fit: contain;
 }
 
@@ -923,17 +937,6 @@ figcaption {
   padding: 8px 10px;
   color: white;
   background: rgba(0, 0, 0, 0.58);
-}
-
-.art-grid .video-art video {
-  height: auto;
-  background: #050608;
-}
-
-.art-grid .video-art figcaption {
-  position: static;
-  padding: 10px 14px;
-  background: transparent;
 }
 
 .feature-art {

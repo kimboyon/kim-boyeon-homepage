@@ -82,11 +82,18 @@ test("homepage uses updated speaker wording and Korean line-breaking controls", 
   const css = readFileSync(join(root, "styles.css"), "utf8");
 
   assert.match(html, /AI출판작가/, "speaker intro should say AI출판작가");
+  assert.match(html, /AI아트작가/, "speaker intro should include AI아트작가");
+  assert.match(html, /ai-digital-tutor-badge\.png/, "speaker profile should display the digital tutor badge");
+  assert.equal(existsSync(join(root, "assets", "ai-digital-tutor-badge.png")), true, "digital tutor badge should exist");
+  assert.match(css, /\.digital-tutor-badge/, "digital tutor badge should have a bounded size");
   assert.doesNotMatch(html, /출판 작가/, "old speaker wording should be removed");
   assert.match(html, /공직 20년 5개월 · 요양보호사 10년 · AI로 시작한 인생 3막/, "career metric should be grouped clearly");
   assert.match(html, /경력[\s\S]*공직 20년 5개월[\s\S]*요양보호사 10년/, "about section should separate career evidence");
-  assert.match(html, /자격[\s\S]*따능AI활용전문강사 2급[\s\S]*생성형AI교육지도사/, "about section should separate qualifications");
+  assert.match(html, /자격[\s\S]*따능AI활용전문강사 1급[\s\S]*GOE마케팅컨설턴트[\s\S]*따능AI활용전문강사 2급/, "new qualifications should lead the list");
+  assert.match(html, /2026 AI디지털튜터 양성과정 수료/, "digital tutor training should be listed");
   assert.match(html, /창작 성과[\s\S]*출간 도서 20권[\s\S]*AI아트 공모전 수상 3회/, "about section should separate creative results");
+  assert.match(html, /국제AI영화제 37개 공식 선정·수상/, "film festival count should be current");
+  assert.doesNotMatch(html, /30여 개/, "outdated film festival count should be removed");
   assert.doesNotMatch(html, /24\+/, "duplicated AI film count metric should be removed");
   assert.doesNotMatch(html, /AI영화 선정·수상/, "duplicated AI film metric label should be removed");
   assert.match(css, /word-break:\s*keep-all/, "Korean words should not break awkwardly");
@@ -270,14 +277,14 @@ test("homepage expands AI art gallery and award history", () => {
     "art-love.jpg",
     "art-fan.jpg",
     "art-present.jpg",
-    "art-curiosity-window.mp4",
+    "art-curiosity-window.jpg",
     "art-new-path.jpg",
   ]) {
     assert.match(html, new RegExp(`assets/${asset}`), `missing added art asset: ${asset}`);
     assert.equal(existsSync(join(root, "assets", asset)), true, `added art asset should exist: ${asset}`);
   }
 
-  assert.match(html, /art-curiosity-window\.mp4" controls/, "exhibition video should be playable");
+  assert.doesNotMatch(html, /art-curiosity-window\.mp4/, "exhibition video should be replaced by the still image");
   assert.match(html, /Art Symphony Kawasaki 2026 · The Voice of Artists/, "Kawasaki exhibition should be listed");
   assert.match(html, /AI아트 수상 및 전시 이력/, "art history should cover awards and exhibitions");
 
@@ -373,5 +380,15 @@ test("homepage includes GEO metadata, crawl files, and external evidence links",
       `missing external article link ${articleId}`,
     );
     assert.match(llms, new RegExp(`idxno=${articleId}`), `llms.txt should include article ${articleId}`);
+  }
+
+  for (const [date, title] of [
+    ["2026-04-19", "AI영화감독 김보연 ‘The Last Lie’, 방콕 영화제 2026 수상작 선정"],
+    ["2026-03-31", "디지털융합교육원 김보연 강사 초청 생성형 AI 시대 맞춘 'POD 출판' 실전 강의 진행"],
+    ["2026-04-27", "[김진선 人터뷰] POD 출판 기획자며 전문 강사, AI강사사관학교 앰베서더 김보연 강사의 ‘기록하는 삶’이 전하는 울림"],
+    ["2026-02-11", "AI강사사관학교, 강남 앙트레블서 '앰배서더 위촉식' 개최"],
+  ]) {
+    assert.match(html, new RegExp(`<time datetime="${date}">`), `article date ${date} should be visible`);
+    assert.ok(html.includes(title), `article title should match its source: ${title}`);
   }
 });
