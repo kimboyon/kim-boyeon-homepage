@@ -282,15 +282,23 @@ test("homepage expands AI art gallery and award history", () => {
   assert.match(html, /AI아트 수상 및 전시 이력/, "art history should cover awards and exhibitions");
 
   for (const text of [
-    "2025년 글로벌 AI아트 공모전",
-    "은상",
-    "2025년 제20회 일본 대판(오사카) 공모전",
-    "우수상",
-    "2026년 제25회 한국미술대전 입상",
-    "우수상1, 입선4",
+    "2025.02 · 글로벌 AI아트 공모전",
+    "은상 · Where am I",
+    "2025.11 · 제20회 일본 대판(오사카) 공모전",
+    "우수상 · Small Wind Big Hope",
+    "2026.06 · 제25회 한국미술대전 입상",
+    "우수상1: Harmony · 입선4: 어울림, Love, We, 완벽한 쉼",
+    "김보_連(연, 잇닿다)",
+    "dream &amp; DREAM",
+    "AI 콘텐츠 페스티벌 2025",
+    "제26회 올해의 작가 100인 초대전",
+    "제25회 한국미술대전 입상자 전시회",
+    "따능스쿨 AI아트 전문가 과정",
   ]) {
     assert.match(html, new RegExp(text.replace(/[()]/g, "\\$&")), `missing art award text: ${text}`);
   }
+
+  assert.doesNotMatch(html, /한국-스웨덴 수교 60주년 명작 초대전/, "canceled exhibition should not be presented as completed");
 
   assert.match(css, /\.art-awards/, "art awards styles should exist");
   assert.match(

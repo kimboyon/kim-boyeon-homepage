@@ -957,20 +957,29 @@ figcaption {
   margin-bottom: 16px;
 }
 
+.art-history-group + .art-history-group {
+  margin-top: 22px;
+}
+
+.art-history-group h4 {
+  margin: 0 0 10px;
+  font-size: 1rem;
+}
+
 .art-awards ul {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
+  gap: 0;
   padding: 0;
   margin: 0;
   list-style: none;
 }
 
 .art-awards li {
-  min-height: 112px;
-  padding: 18px;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  background: rgba(0, 0, 0, 0.22);
+  display: grid;
+  grid-template-columns: minmax(220px, 0.9fr) minmax(0, 1.1fr);
+  gap: 16px;
+  padding: 12px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
   word-break: keep-all;
 }
 
@@ -984,9 +993,12 @@ figcaption {
 }
 
 .art-awards span {
-  margin-top: 10px;
+  color: rgba(255, 255, 255, 0.76);
+  line-height: 1.5;
+}
+
+.art-history-group:first-of-type span {
   color: #f7c548;
-  font-weight: 900;
 }
 
 .film-section {
@@ -1153,8 +1165,9 @@ figcaption {
     grid-column: auto;
   }
 
-  .art-awards ul {
+  .art-awards li {
     grid-template-columns: 1fr;
+    gap: 4px;
   }
 
   .review-gallery {
