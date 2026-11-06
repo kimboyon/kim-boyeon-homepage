@@ -700,6 +700,15 @@ h3 {
   object-fit: contain;
 }
 
+.institution-logo-on-dark {
+  padding: 10px;
+  background: #21344a;
+}
+
+.institution-no-logo strong {
+  margin-top: 0;
+}
+
 .review-gallery-block {
   margin-top: 34px;
   padding-top: 28px;

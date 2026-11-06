@@ -145,6 +145,9 @@ test("homepage includes all 20 published book covers and lecture institutions", 
     "아산시 평생학습관",
     "군산대학교 평생교육원",
     "동구여자중학교",
+    "강원대학교 삼척캠퍼스",
+    "전북특별자치도 간호사회",
+    "전주 양지노인복지관",
   ]) {
     assert.match(html, new RegExp(institution), `missing institution: ${institution}`);
   }
@@ -210,23 +213,26 @@ test("homepage includes updated lecture details, icons, form CTA, and institutio
   }
 
   for (const asset of [
-    "institution-ttaneng.svg",
-    "institution-aiac.svg",
-    "institution-koia.svg",
-    "institution-anyang.svg",
-    "institution-dcon.svg",
-    "institution-koreatech.svg",
-    "institution-smartcity.svg",
-    "institution-yonam.svg",
-    "institution-sangmyung.svg",
-    "institution-metro.svg",
-    "institution-bto.svg",
-    "institution-asan.svg",
-    "institution-gunsan.svg",
-    "institution-donggu.svg",
+    "institution-ttaneng.png",
+    "institution-koia.png",
+    "institution-koreatech.png",
+    "institution-smartcity.png",
+    "institution-yonam.png",
+    "institution-sangmyung-ci.png",
+    "institution-metro.png",
+    "institution-bto.png",
+    "institution-asan.png",
+    "institution-gunsan.png",
+    "institution-kangwon.webp",
+    "institution-jbnurse.png",
+    "institution-yangji.png",
   ]) {
     assert.match(html, new RegExp(`assets/${asset}`), `missing institution logo reference: ${asset}`);
     assert.equal(existsSync(join(root, "assets", asset)), true, `institution logo should exist: ${asset}`);
+  }
+
+  for (const institution of ["AI아티스트 클럽", "안양시 베이비부머지원센터", "디지털융합교육원", "동구여자중학교"]) {
+    assert.match(html, new RegExp(`<article class="institution-no-logo"><strong>${institution}</strong>`), `${institution} should not display an unverified logo`);
   }
 
   assert.match(css, /\.lecture-meta/, "lecture meta styles should exist");
