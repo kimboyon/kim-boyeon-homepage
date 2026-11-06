@@ -253,7 +253,18 @@ h3 {
 }
 
 .lecture-photo-grid img {
+  display: block;
   aspect-ratio: 4 / 3;
+}
+
+.lecture-photo-grid a {
+  display: block;
+  min-width: 0;
+}
+
+.lecture-photo-grid a:focus-visible {
+  outline: 3px solid #f7c548;
+  outline-offset: 3px;
 }
 
 .lecture-photo-grid .photo-feature {

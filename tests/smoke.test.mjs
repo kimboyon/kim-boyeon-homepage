@@ -46,14 +46,14 @@ test("homepage references real local media assets", () => {
     "assets/qr-littly.png",
     "assets/qr-kakao-openchat.jpg",
     "assets/lecture-metro-workshop.jpeg",
-    "assets/lecture-metro-session.jpg",
+    "assets/lecture-gunsan-week6.jpg",
     "assets/lecture-smartcity.JPG",
     "assets/lecture-asan.JPG",
     "assets/lecture-donggu.JPG",
     "assets/lecture-koreatech.JPG",
     "assets/lecture-anyang-babyboomer.JPG",
-    "assets/lecture-pod-guide.jpg",
-    "assets/lecture-ai-movie-director.png",
+    "assets/lecture-gunsan-week7.jpg",
+    "assets/lecture-gunsan-week8.jpg",
     "assets/review-survey-01.png",
     "assets/review-survey-02.png",
     "assets/review-kakao-ai-class.png",
@@ -76,8 +76,9 @@ test("homepage hero uses lecture field photos and removes old value cards", () =
   assert.match(html, /lecture-photo-grid/, "hero should use the lecture photo grid");
   assert.match(html, /메트로경제 임직원 대상 따능AI 활용 강의 현장/, "hero should describe lecture photos");
   assert.match(html, /안양시 베이비부머지원센터 생성형AI교육지도사 양성과정 강의/, "hero should include the added Anyang lecture photo");
-  assert.match(html, /POD 출판 완벽 가이드 온라인 강의 이미지/, "hero should include the added POD lecture image");
-  assert.match(html, /요양보호사에서 AI 영화감독으로 강의 썸네일/, "hero should include the added AI movie lecture thumbnail");
+  for (const week of [6, 7, 8]) {
+    assert.match(html, new RegExp(`href="assets/lecture-gunsan-week${week}\\.jpg"`), `Gunsan week ${week} photo should open in full`);
+  }
   assert.doesNotMatch(html, /<section class="section value-section"/, "old AI value card section should be removed");
   assert.doesNotMatch(html, />AI로 쓰다</, "old AI writing card should be removed");
   assert.doesNotMatch(html, />AI로 그리다</, "old AI drawing card should be removed");
