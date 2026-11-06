@@ -1043,8 +1043,8 @@ figcaption {
 
 .film-card img {
   width: 100%;
-  aspect-ratio: 3 / 4;
-  object-fit: cover;
+  aspect-ratio: 1587 / 2245;
+  object-fit: contain;
 }
 
 .timeline-section {
