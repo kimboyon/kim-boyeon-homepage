@@ -283,10 +283,9 @@ test("homepage hero focuses on the primary lecture offer", () => {
   const html = readFileSync(join(root, "index.html"), "utf8");
   const css = readFileSync(join(root, "styles.css"), "utf8");
 
-  assert.match(html, /성인·중장년을 위한 실습형 생성형 AI 강의/, "hero should lead with primary lecture offer");
-  assert.match(html, /이미지·영상·전자책 결과물까지 완성합니다/, "hero should state concrete outcomes");
-  assert.match(html, /AI가 처음인 성인·중장년을 위한 생성형 AI 실습 강의입니다\./, "hero intro should be short first sentence");
-  assert.match(html, /이미지·짧은 영상·전자책 아이디어 중 하나를 직접 완성합니다\./, "hero intro should be short second sentence");
+  assert.match(html, /<h1>AI로 그리고, 연출하고, 출판하는 창작 수업<\/h1>/, "hero should lead with the creative lecture offer");
+  assert.match(html, /AI아트·AI영화·AI출판을 실습으로 배우다/, "hero should state the three creative fields");
+  assert.match(html, /처음 시작하는 성인·중장년도 자신의 이야기에서 출발해 이미지와 영상, 책으로 표현하는 과정을 차근차근 배웁니다\./, "hero intro should match the requested copy");
   assert.match(html, /<a class="button primary hero-primary-cta" href="https:\/\/forms\.gle\/mHuHnCKQ2qnffuE79"[^>]*>기관 강의 문의하기<\/a>/, "hero primary CTA should link to form");
   assert.match(css, /\.hero-primary-cta/, "hero primary CTA should have distinct emphasis styles");
 });
