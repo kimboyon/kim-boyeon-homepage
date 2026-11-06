@@ -34,4 +34,4 @@ Allow: /
 User-agent: meta-externalagent
 Allow: /
 
-Sitemap: https://kim-boyeon-homepage.vercel.app/sitemap.xml
+Sitemap: https://kimboyeon-eum.com/sitemap.xml

@@ -358,12 +358,13 @@ test("homepage includes GEO metadata, crawl files, and external evidence links",
   const css = readFileSync(join(root, "styles.css"), "utf8");
   const robots = readFileSync(join(root, "robots.txt"), "utf8");
   const llms = readFileSync(join(root, "llms.txt"), "utf8");
+  const sitemap = readFileSync(join(root, "sitemap.xml"), "utf8");
 
   for (const text of [
     '"@type": "FAQPage"',
     '"@type": "Service"',
     '"@type": "Offer"',
-    '"dateModified": "2026-08-17"',
+    '"dateModified": "2026-11-06"',
     "기사로 확인하는 강의와 창작 활동",
   ]) {
     assert.match(html, new RegExp(text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")), `missing GEO metadata: ${text}`);
@@ -383,6 +384,19 @@ test("homepage includes GEO metadata, crawl files, and external evidence links",
 
   assert.match(llms, /# 김보연 이음/);
   assert.match(llms, /성인·중장년/);
+  assert.match(html, /<link rel="canonical" href="https:\/\/kimboyeon-eum\.com\/" \/>/);
+  assert.match(html, /<meta property="og:url" content="https:\/\/kimboyeon-eum\.com\/" \/>/);
+  assert.match(robots, /Sitemap: https:\/\/kimboyeon-eum\.com\/sitemap\.xml/);
+  assert.match(sitemap, /<loc>https:\/\/kimboyeon-eum\.com\/<\/loc>/);
+  assert.match(sitemap, /<lastmod>2026-11-06<\/lastmod>/);
+  assert.match(llms, /\[홈\]\(https:\/\/kimboyeon-eum\.com\/\)/);
+  assert.match(llms, /출간 도서 20권/);
+  for (const content of [html, robots, llms, sitemap]) {
+    assert.doesNotMatch(content, /kim-boyeon-homepage\.vercel\.app/, "old domain should not remain in metadata or crawl files");
+  }
+  const structuredData = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)?.[1];
+  assert.ok(structuredData, "structured data should exist");
+  assert.equal(JSON.parse(structuredData)["@graph"][0].url, "https://kimboyeon-eum.com/");
   assert.match(css, /\.press-grid/, "external evidence cards should have styles");
   assert.match(css, /\.press-meta/, "press source and date should have styles");
   assert.equal((html.match(/<span>파이낸스투데이<\/span>/g) || []).length, 4, "each article should show its publisher");
