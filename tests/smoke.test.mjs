@@ -10,6 +10,11 @@ test("Naver ownership verification file is available at the site root", () => {
   assert.equal(readFileSync(join(root, filename), "utf8").trim(), `naver-site-verification: ${filename}`);
 });
 
+test("Google ownership verification file is available at the site root", () => {
+  const filename = "googleb7a0997eb2075149.html";
+  assert.equal(readFileSync(join(root, filename), "utf8").trim(), `google-site-verification: ${filename}`);
+});
+
 test("homepage shell includes the core brand sections", () => {
   const htmlPath = join(root, "index.html");
   assert.equal(existsSync(htmlPath), true, "index.html should exist");
