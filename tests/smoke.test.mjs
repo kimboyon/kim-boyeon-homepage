@@ -393,6 +393,7 @@ test("homepage includes GEO metadata, crawl files, and external evidence links",
   assert.match(html, /<link rel="canonical" href="https:\/\/kimboyeon-eum\.com\/" \/>/);
   assert.match(html, /<meta property="og:url" content="https:\/\/kimboyeon-eum\.com\/" \/>/);
   assert.match(robots, /Sitemap: https:\/\/kimboyeon-eum\.com\/sitemap\.xml/);
+  assert.match(robots, /User-agent: Yeti\s+Allow: \//, "Naver Yeti should be allowed explicitly");
   assert.match(sitemap, /<loc>https:\/\/kimboyeon-eum\.com\/<\/loc>/);
   assert.match(sitemap, /<lastmod>2026-11-06<\/lastmod>/);
   assert.match(llms, /\[홈\]\(https:\/\/kimboyeon-eum\.com\/\)/);
