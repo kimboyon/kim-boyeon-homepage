@@ -5,6 +5,11 @@ import { test } from "node:test";
 
 const root = process.cwd();
 
+test("Naver ownership verification file is available at the site root", () => {
+  const filename = "naver3770f033a3f30479a0de25c0349f049a.html";
+  assert.equal(readFileSync(join(root, filename), "utf8").trim(), `naver-site-verification: ${filename}`);
+});
+
 test("homepage shell includes the core brand sections", () => {
   const htmlPath = join(root, "index.html");
   assert.equal(existsSync(htmlPath), true, "index.html should exist");
