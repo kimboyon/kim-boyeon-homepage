@@ -160,6 +160,7 @@ test("homepage includes all 21 published book covers and lecture institutions", 
     "강원대학교 삼척캠퍼스",
     "전북특별자치도 간호사회",
     "전주 양지노인복지관",
+    "전북서남상공회의소",
   ]) {
     assert.match(html, new RegExp(institution), `missing institution: ${institution}`);
   }
@@ -174,6 +175,13 @@ test("homepage includes all 21 published book covers and lecture institutions", 
     ["메트로경제", "따능AI활용"],
     ["군산대학교 평생교육원", "생성형AI활용 출판"],
     ["동구여자중학교", "AI리터러시와 AI영상콘텐츠 창작"],
+    ["한국기술교육대학교 능력개발원", "따능AI실습"],
+    ["강원대학교 삼척캠퍼스", "따능AI실습"],
+    ["스마트도시협회", "AI활용 업무효율화"],
+    ["부산관광공사", "AI활용 업무효율화"],
+    ["전북특별자치도 간호사회", "AI활용 홍보 콘텐츠 제작"],
+    ["전주 양지노인복지관", "AI로 일상 업그레이드"],
+    ["전북서남상공회의소", "소상공인 AI활용 홍보콘텐츠 제작"],
   ]) {
     assert.match(html, new RegExp(`<strong>${institution}</strong><em>${topic}</em>`), `${institution} should show its lecture topic`);
   }
@@ -182,7 +190,7 @@ test("homepage includes all 21 published book covers and lecture institutions", 
     "AI아트 창작",
     "업무효율화",
     "AI출판",
-    "AI 영상콘텐츠",
+    "AI활용 업무효율화",
   ]) {
     assert.match(html, new RegExp(topic), `missing institution topic: ${topic}`);
   }
@@ -296,6 +304,7 @@ test("homepage includes updated lecture details, icons, form CTA, and institutio
     "institution-kangwon.webp",
     "institution-jbnurse.png",
     "institution-yangji.png",
+    "institution-jeonbuk-southwest-chamber.png",
   ]) {
     assert.match(html, new RegExp(`assets/${asset}`), `missing institution logo reference: ${asset}`);
     assert.equal(existsSync(join(root, "assets", asset)), true, `institution logo should exist: ${asset}`);

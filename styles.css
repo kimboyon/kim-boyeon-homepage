@@ -711,6 +711,10 @@ h3 {
   object-fit: contain;
 }
 
+.institution-logo-wide {
+  width: min(210px, 94%);
+}
+
 .institution-logo-on-dark {
   padding: 10px;
   background: #21344a;
