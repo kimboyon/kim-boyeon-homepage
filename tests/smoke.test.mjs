@@ -102,7 +102,7 @@ test("homepage uses updated speaker wording and Korean line-breaking controls", 
   assert.match(html, /경력[\s\S]*공직 20년 5개월[\s\S]*요양보호사 10년/, "about section should separate career evidence");
   assert.match(html, /자격[\s\S]*따능AI활용전문강사 1급[\s\S]*GOE마케팅컨설턴트[\s\S]*따능AI활용전문강사 2급/, "new qualifications should lead the list");
   assert.match(html, /2026 AI디지털튜터 양성 과정 강사형 온오프라인 교육 수료 \(시행처: 에이블런\)/, "digital tutor training and provider should be listed");
-  assert.match(html, /창작 성과[\s\S]*출간 도서 20권[\s\S]*AI아트 공모전 수상 3회/, "about section should separate creative results");
+  assert.match(html, /창작 성과[\s\S]*출간 도서 21권[\s\S]*AI아트 공모전 수상 3회/, "about section should separate creative results");
   assert.match(html, /국제AI영화제 37개 공식 선정·수상/, "film festival count should be current");
   assert.doesNotMatch(html, /30여 개/, "outdated film festival count should be removed");
   assert.doesNotMatch(html, /24\+/, "duplicated AI film count metric should be removed");
@@ -111,7 +111,7 @@ test("homepage uses updated speaker wording and Korean line-breaking controls", 
   assert.match(css, /\.metric strong[\s\S]*white-space:\s*nowrap/, "metric number should stay on one line");
 });
 
-test("homepage includes all 20 published book covers and lecture institutions", () => {
+test("homepage includes all 21 published book covers and lecture institutions", () => {
   const html = readFileSync(join(root, "index.html"), "utf8");
   const bookAssets = [
     "book-forty.jpg",
@@ -134,6 +134,7 @@ test("homepage includes all 20 published book covers and lecture institutions", 
     "book-everyday-happiness.png",
     "book-caregiver-ai-instructor.png",
     "book-senior-smartphone.png",
+    "book-raindrop-wind.png",
   ];
 
   for (const asset of bookAssets) {
@@ -184,6 +185,30 @@ test("homepage includes all 20 published book covers and lecture institutions", 
     "AI 영상콘텐츠",
   ]) {
     assert.match(html, new RegExp(topic), `missing institution topic: ${topic}`);
+  }
+});
+
+test("every book has a sales destination and recent lecture images open in full", () => {
+  const html = readFileSync(join(root, "index.html"), "utf8");
+  const bookSection = html.match(/<div class="book-grid"[\s\S]*?<\/div>/)?.[0];
+  assert.ok(bookSection, "book grid should exist");
+  assert.equal((bookSection.match(/<figure>/g) ?? []).length, 21);
+  assert.equal((bookSection.match(/class="book-purchase"/g) ?? []).length, 21);
+  assert.equal((bookSection.match(/<a class="book-purchase" href="https:\/\//g) ?? []).length, 21);
+  assert.equal((bookSection.match(/에서 찾기/g) ?? []).length, 1, "only the unavailable Blurb product should use a shop search");
+  assert.match(bookSection, /book-raindrop-wind\.png[\s\S]*?href="https:\/\/www\.yes24\.com\/product\/goods\/202468973"/, "new book should link to its product page");
+
+  for (const asset of [
+    "lecture-kangwon-sports.jpg",
+    "lecture-nurses-session1.jpg",
+    "lecture-nurses-session2.jpg",
+    "lecture-yangji-session1.jpg",
+    "lecture-yangji-session2.jpg",
+    "lecture-yangji-session3.jpg",
+    "lecture-yangji-session4.jpg",
+  ]) {
+    assert.equal(existsSync(join(root, "assets", asset)), true, `lecture image should exist: ${asset}`);
+    assert.match(html, new RegExp(`href="assets/${asset.replace(".", "\\.")}"`), `lecture image should open in full: ${asset}`);
   }
 });
 
@@ -407,7 +432,7 @@ test("homepage includes GEO metadata, crawl files, and external evidence links",
   assert.match(sitemap, /<loc>https:\/\/kimboyeon-eum\.com\/<\/loc>/);
   assert.match(sitemap, /<lastmod>2026-11-06<\/lastmod>/);
   assert.match(llms, /\[홈\]\(https:\/\/kimboyeon-eum\.com\/\)/);
-  assert.match(llms, /출간 도서 20권/);
+  assert.match(llms, /출간 도서 21권/);
   for (const content of [html, robots, llms, sitemap]) {
     assert.doesNotMatch(content, /kim-boyeon-homepage\.vercel\.app/, "old domain should not remain in metadata or crawl files");
   }
