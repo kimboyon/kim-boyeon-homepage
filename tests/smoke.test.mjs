@@ -212,6 +212,40 @@ test("every book has a sales destination and recent lecture images open in full"
   }
 });
 
+test("AI digital tutor and Gunsan lecture series show every supplied photo", () => {
+  const html = readFileSync(join(root, "index.html"), "utf8");
+  const gallery = html.match(/<div class="lecture-gallery-block"[\s\S]*?<div class="review-gallery-block"/)?.[0];
+  assert.ok(gallery, "lecture gallery should exist");
+  assert.match(gallery, /AI디지털튜터 양성과정/);
+  assert.match(gallery, /군산대학교 평생교육원 · 그림책·컬러링북 출판/);
+
+  const assets = [
+    "lecture-tutor-gwangju-0805.jpg",
+    "lecture-tutor-konkuk-0807.jpg",
+    "lecture-gunsan-week1.jpg",
+    "lecture-gunsan-week2.jpg",
+    "lecture-gunsan-week3.jpg",
+    "lecture-gunsan-week4.jpg",
+    "lecture-gunsan-week5.jpg",
+    "lecture-gunsan-week5-results.jpg",
+    "lecture-gunsan-week6.jpg",
+    "lecture-gunsan-week6-results.jpg",
+    "lecture-gunsan-week7.jpg",
+    "lecture-gunsan-week7-results.jpg",
+    "lecture-gunsan-week8.jpg",
+    "lecture-gunsan-week8-results.jpg",
+    "lecture-gunsan-week9.jpg",
+    "lecture-gunsan-week10.jpg",
+    "lecture-gunsan-week11.jpg",
+  ];
+  for (const asset of assets) {
+    assert.equal(existsSync(join(root, "assets", asset)), true, `lecture photo should exist: ${asset}`);
+    assert.match(gallery, new RegExp(`href="assets/${asset.replace(".", "\\.")}"`), `lecture photo should open in full: ${asset}`);
+  }
+  assert.equal((gallery.match(/class="lecture-gallery"/g) ?? []).length, 3);
+  assert.equal((gallery.match(/<a href="assets\/lecture-/g) ?? []).length, 24);
+});
+
 test("homepage includes updated lecture details, icons, form CTA, and institution logo assets", () => {
   const html = readFileSync(join(root, "index.html"), "utf8");
   const css = readFileSync(join(root, "styles.css"), "utf8");
