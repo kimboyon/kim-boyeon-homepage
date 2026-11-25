@@ -292,7 +292,10 @@ test("homepage includes updated lecture details, icons, form CTA, and institutio
 
   for (const asset of [
     "institution-ttaneng.png",
+    "institution-ai-artist-club.jpg",
     "institution-koia.png",
+    "institution-anyang-babyboomer.png",
+    "institution-digital-convergence.jpeg",
     "institution-koreatech.png",
     "institution-smartcity.png",
     "institution-yonam.png",
@@ -301,6 +304,7 @@ test("homepage includes updated lecture details, icons, form CTA, and institutio
     "institution-bto.png",
     "institution-asan.png",
     "institution-gunsan.png",
+    "institution-donggu-girls-school.png",
     "institution-kangwon.webp",
     "institution-jbnurse.png",
     "institution-yangji.png",
@@ -310,9 +314,7 @@ test("homepage includes updated lecture details, icons, form CTA, and institutio
     assert.equal(existsSync(join(root, "assets", asset)), true, `institution logo should exist: ${asset}`);
   }
 
-  for (const institution of ["AI아티스트 클럽", "안양시 베이비부머지원센터", "디지털융합교육원", "동구여자중학교"]) {
-    assert.match(html, new RegExp(`<article class="institution-no-logo"><strong>${institution}</strong>`), `${institution} should not display an unverified logo`);
-  }
+  assert.doesNotMatch(html, /institution-no-logo/, "all institution cards should display a logo");
 
   assert.match(css, /\.lecture-meta/, "lecture meta styles should exist");
   assert.match(css, /\.institution-logo/, "institution logo styles should exist");
